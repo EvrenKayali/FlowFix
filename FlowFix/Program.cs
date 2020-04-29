@@ -44,14 +44,17 @@ namespace FlowFix
             {
                 Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-                IPAddress broadcast = IPAddress.Parse("192.168.1.9");
+                var targetIp = args[1];
+                var targetPort = args[2];
 
-                byte[] sendbuf = Encoding.ASCII.GetBytes(args[2]);
-                IPEndPoint ep = new IPEndPoint(broadcast, Convert.ToInt32(args[1]));
+                IPAddress broadcast = IPAddress.Parse(targetIp);
 
+                byte[] sendbuf = Encoding.ASCII.GetBytes(args[3]);
+                IPEndPoint ep = new IPEndPoint(broadcast, Convert.ToInt32(targetPort));
+                
                 s.SendTo(sendbuf, ep);
 
-                Console.WriteLine("Message sent to the broadcast address");
+                Console.WriteLine($"Message sent to the broadcast address {targetIp}:{targetPort}");
             }
         }
     }

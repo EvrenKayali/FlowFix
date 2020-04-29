@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FlowFix": {
+      "commandName": "Project",
+      "commandLineArgs": "s 1100 evren"
+    }
+  }
+}

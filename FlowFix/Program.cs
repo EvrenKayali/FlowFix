@@ -7,8 +7,7 @@ namespace FlowFix
 {
     class Program
     {
-        private const int listenPort = 11000;
-        private static void StartListener()
+        private static void StartListener(int listenPort)
         {
             UdpClient listener = new UdpClient(listenPort);
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
@@ -36,10 +35,9 @@ namespace FlowFix
 
         static void Main(string[] args)
         {
-
             if (args[0] == "l")
             {
-                StartListener();
+                StartListener(Convert.ToInt32(args[1]));
             }
 
             if (args[0] == "s")
@@ -48,8 +46,8 @@ namespace FlowFix
 
                 IPAddress broadcast = IPAddress.Parse("192.168.1.9");
 
-                byte[] sendbuf = Encoding.ASCII.GetBytes(args[1]);
-                IPEndPoint ep = new IPEndPoint(broadcast, 11000);
+                byte[] sendbuf = Encoding.ASCII.GetBytes(args[2]);
+                IPEndPoint ep = new IPEndPoint(broadcast, Convert.ToInt32(args[1]));
 
                 s.SendTo(sendbuf, ep);
 
